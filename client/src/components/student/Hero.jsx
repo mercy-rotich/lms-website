@@ -1,5 +1,6 @@
 import React from 'react'
 import { assets } from '../../assets/assets'
+import SearchBar from './SearchBar'
 const Hero = () => {
   return (
     <div className='flex flex-col items-center justify-center w-full md
@@ -10,6 +11,8 @@ const Hero = () => {
       <p className='md:block hidden text-gray-500 max-w-2xl mx-auto'>We bring together world-class instructors , interactive content, and a supportive community to help you achieve your personal and professional goals</p>
 
       <p className='md:hidden text-gray-500 max-w-sm mx-auto'>We bring together world-class instructors to help you achieve your personal and professional goals.</p>
+
+      <SearchBar/>
     </div>
   )
 }
