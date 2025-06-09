@@ -4,44 +4,43 @@ import { useNavigate } from "react-router-dom";
 
 export const AppContext = createContext()
 
-export const AppContextProvider =(props)=>{
-
-    const currency = import.meta.VITE_CURRENCY
+export const AppContextProvider = (props) => {
+    const currency = import.meta.env.VITE_CURRENCY // Fixed typo
 
     const navigate = useNavigate()
 
-    const [allCourses,setAllCourses] = useState([])
-    const [isEducator,setIsEducator] = useState(true)
+    const [allCourses, setAllCourses] = useState([])
+    const [isEducator, setIsEducator] = useState(true)
 
-    //fetch all courses
-
-    const fetchAllCourses = async ()=>{
+    // Fetch all courses
+    const fetchAllCourses = () => { // Removed async since not needed
+        console.log('Setting courses:', dummyCourses); // Debug line
         setAllCourses(dummyCourses)
     }
 
-
-    //function to create average rating of course
-
-    const calculateRating =(course)=>{
-        if(course.courseRatings.length ===0){
+    // Function to create average rating of course
+    const calculateRating = (course) => {
+        if (course.courseRatings.length === 0) {
             return 0;
         }
-        let totalRating =0
-        course.courseRatings.forEach(rating =>{
+        let totalRating = 0
+        course.courseRatings.forEach(rating => {
             totalRating += rating.rating
         })
-        return totalRating/course.courseRatings.length
+        return totalRating / course.courseRatings.length
     }
-    useEffect(()=>{
-        fetchAllCourses()
-    },[])
 
-    const value ={
-        currency,allCourses,navigate,calculateRating,isEducator,setIsEducator
+    useEffect(() => {
+        fetchAllCourses()
+    }, [])
+
+    const value = {
+        currency, allCourses, navigate, calculateRating, isEducator, setIsEducator
     }
- return  (
-    <AppContext.Provider value={value}> 
-        {props.children}
-    </AppContext.Provider>
- )
+
+    return (
+        <AppContext.Provider value={value}>
+            {props.children}
+        </AppContext.Provider>
+    )
 }
